@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update User Demo</title>
+  <style>
+    /* see https://www.w3schools.com/css/css3_animations.asp
+     https://www.w3schools.com/css/tryit.asp?filename=trycss3_animation1 
+     */
+    .fade-out {
+      /* background-color: red; */
+      font-size: 2em;
+      animation-name: flash-msg;
+      animation-duration: 4s;
+      animation-fill-mode: forwards;
+    }
+    .error{background-color: red}
+    .success{background-color: green}
+    @keyframes flash-msg {
+      from {
+        opacity: 1;
+      }
+
+      to {
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+{%- with messages = get_flashed_messages(with_categories=true) -%}
+  {% if messages %}
+      {% for category, message in messages %}
+          <span class="fade-out {{category}}">{{ message|safe }}</span><br>
+      {% endfor %}
+  {% endif %}
+{%- endwith %}
+
+
+  <h1>Update User Demo</h1>
+  <a href={{ url_for('user_edit', user_id=1) }}>Edit User With user_id=1</a>
+</body>
+
+</html>
